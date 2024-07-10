@@ -1,27 +1,39 @@
 package ru.silent_boy.spring.models;
 
+import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+@Entity
+@Table(name = "Book")
 public class Book {
-    private int bookId;
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     @NotEmpty(message = "Title can not be empty!")
-    @Size(min = 2, max = 100, message = "Title must be less than 100 characters!")
+    @Size(min = 2, max = 100, message = "Title must be between 2 and 100 characters!")
+    @Column(name = "title")
     private String title;
 
     @NotEmpty(message = "Author can not be empty!")
-    @Size(min = 2, max = 100, message = "Author name must be less than 100 characters!")
+    @Size(min = 2, max = 100, message = "Author name must be between 2 and 100 characters!")
+    @Column(name = "author")
     private String author;
 
     @Min(value = 0, message = "Year of publication must be greater or equal 0!")
     @Max(value = 2024, message = "Year of publication must be less or equal 2024!")
+    @Column(name = "year_of_publication")
     private int yearOfPublication;
 
-    public Book(int bookId, String title, String author, int yearOfPublication) {
-        this.bookId = bookId;
+    @ManyToOne
+    @JoinColumn(name = "person_id", referencedColumnName = "id")
+    private Person owner;
+
+    public Book(String title, String author, int yearOfPublication) {
         this.title = title;
         this.author = author;
         this.yearOfPublication = yearOfPublication;
@@ -29,12 +41,12 @@ public class Book {
 
     public Book() {}
 
-    public int getBookId() {
-        return bookId;
+    public int getId() {
+        return id;
     }
 
-    public void setBookId(int bookId) {
-        this.bookId = bookId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -59,5 +71,13 @@ public class Book {
 
     public void setYearOfPublication(int yearOfPublication) {
         this.yearOfPublication = yearOfPublication;
+    }
+
+    public Person getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Person owner) {
+        this.owner = owner;
     }
 }

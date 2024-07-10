@@ -20,10 +20,10 @@
 </div>
 
 <hr/>
-<form method="GET" th:action="@{/people/{id}/edit(id=${person.getPersonId()})}" th:object="${person}">
+<form method="GET" th:action="@{/people/{id}/edit(id=${person.getId()})}">
     <input type="submit" value="Редактировать"/>
 </form>
-<form th:method="DELETE" th:action="@{/people/{id}(id=${person.getPersonId()})}" th:object="${book}">
+<form th:method="DELETE" th:action="@{/people/{id}(id=${person.getId()})}">
     <input type="submit" value="Удалить"/>
 </form>
 
