@@ -50,6 +50,10 @@ public class BooksService {
         return book.map(Book::getOwner);
     }
 
+    public List<Book> findByTitleStartingWith(String title) {
+        return booksRepository.findByTitleStartingWith(title);
+    }
+
     @Transactional
     public void save(Book book) {
         booksRepository.save(book);

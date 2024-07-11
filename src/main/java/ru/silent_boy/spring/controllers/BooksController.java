@@ -58,6 +58,18 @@ public class BooksController {
         return "books/show";
     }
 
+    @GetMapping("/search")
+    public String search() {
+        return "books/search";
+    }
+
+    @PostMapping("/search")
+    public String find(@RequestParam("starting_with") String startingWith,
+                       Model model) {
+        model.addAttribute("books", booksService.findByTitleStartingWith(startingWith));
+        return "books/search";
+    }
+
     @GetMapping("/new")
     public String newBook(@ModelAttribute("book") Book book) {
         return "books/new";
