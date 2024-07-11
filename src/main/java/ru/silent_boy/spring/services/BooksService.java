@@ -1,6 +1,8 @@
 package ru.silent_boy.spring.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.silent_boy.spring.models.Book;
@@ -25,6 +27,18 @@ public class BooksService {
 
     public List<Book> findAll() {
         return booksRepository.findAll();
+    }
+
+    public List<Book> findAll(int page, int booksPerPage) {
+        return booksRepository.findAll(PageRequest.of(page, booksPerPage)).getContent();
+    }
+
+    public List<Book> findAllSorted() {
+        return booksRepository.findAll(Sort.by("yearOfPublication"));
+    }
+
+    public List<Book> findAllSorted(int page, int booksPerPage) {
+        return booksRepository.findAll(PageRequest.of(page, booksPerPage, Sort.by("yearOfPublication"))).getContent();
     }
 
     public Book findById(int id) {
