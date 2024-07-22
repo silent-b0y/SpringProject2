@@ -5,6 +5,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.Date;
 
 @Entity
 @Table(name = "Book")
@@ -32,6 +33,13 @@ public class Book {
     @ManyToOne
     @JoinColumn(name = "person_id", referencedColumnName = "id")
     private Person owner;
+
+    @Column(name = "owned_at")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date ownedAt;
+
+    @Transient
+    private boolean expired;
 
     public Book(String title, String author, int yearOfPublication) {
         this.title = title;
@@ -79,5 +87,21 @@ public class Book {
 
     public void setOwner(Person owner) {
         this.owner = owner;
+    }
+
+    public Date getOwnedAt() {
+        return ownedAt;
+    }
+
+    public void setOwnedAt(Date ownedAt) {
+        this.ownedAt = ownedAt;
+    }
+
+    public boolean isExpired() {
+        return expired;
+    }
+
+    public void setExpired(boolean expired) {
+        this.expired = expired;
     }
 }

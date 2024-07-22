@@ -10,6 +10,7 @@ import ru.silent_boy.spring.models.Person;
 import ru.silent_boy.spring.repositories.BooksRepository;
 import ru.silent_boy.spring.repositories.PeopleRepository;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -73,6 +74,7 @@ public class BooksService {
         Person owner = peopleRepository.findById(personId).orElse(null);
         if (book != null) {
             book.setOwner(owner);
+            book.setOwnedAt(new Date());
         }
     }
 
