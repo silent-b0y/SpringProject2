@@ -80,7 +80,10 @@ public class BooksService {
 
     @Transactional
     public void unsetOwner(int bookId) {
-        booksRepository.findById(bookId).ifPresent(book -> book.setOwner(null));
+        booksRepository.findById(bookId).ifPresent(book -> {
+            book.setOwner(null);
+            book.setOwnedAt(null);
+        });
     }
 
     @Transactional

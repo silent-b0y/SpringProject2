@@ -1,6 +1,5 @@
 package ru.silent_boy.spring.services;
 
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,7 +32,7 @@ public class PeopleService {
     }
 
     public Optional<Person> findByFullName(String fullName) {
-        return peopleRepository.findByFullName(fullName).stream().findAny();
+        return peopleRepository.findByFullName(fullName);
     }
 
     public List<Book> findBooksById(int id) {

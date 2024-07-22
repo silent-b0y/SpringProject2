@@ -17,7 +17,7 @@
     <div th:if="${books.isEmpty()}">
         Книг не найдено
     </div>
-    <div th:each="book : ${books}" th:unless="${books.isEmpty()}">
+    <div th:each="book : ${books}">
         <a th:text="${book.getTitle() + ', ' + book.getAuthor() + ', ' + book.getYearOfPublication()}">book</a>
         <div th:text="${'Книга сейчас у: ' + book.getOwner().getFullName()}" th:if="${book.getOwner()}"></div>
         <div th:unless="${book.getOwner()}">Книга свободна</div>
